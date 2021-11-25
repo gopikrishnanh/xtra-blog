@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+
+
+        <h1>Delete Comment.....</h1>
+        <br/><br/>
+        <h3>Delete : {{ comment.name }}</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="btn btn-secondary">DELETE</button>
+        </form>
+
+
+
+{% endblock %}

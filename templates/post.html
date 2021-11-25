@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+            <div class="row tm-row">
+                <div class="col-8">
+                    <hr class="tm-hr-primary tm-mb-75">
+                    <!-- Video player 1422x800 -->
+                    <img src="{{ post.img.url }}" alt="Image" class="img-fluid"  width="250" height="250" >
+
+                </div>
+            </div>
+            <div class="row tm-row">
+                <div class="col-lg-8 tm-post-col">
+                    <div class="tm-post-full">
+                        <div class="mb-4">
+                            <h2 class="pt-2 tm-color-primary tm-post-title">{{ post.title }}</h2>
+
+                            <p>
+                               {{ post.body }}
+                            </p>
+
+                        </div>
+                         <div class="d-flex justify-content-between tm-pt-45">
+                              {% if user.is_authenticated %}
+                                 {% if user.id == post.author.id %}
+                                     <a  class='fas fa-pencil-alt' style='font-size:24px' href="{% url 'update' post.pk %}"></a>
+                                     <a  class="material-icons"  href="{% url 'delete' post.pk %}">delete</a>
+
+                                {% endif %}
+                             {% else %}
+                               <div class="alert alert-danger">
+                                   <strong>JOIN</strong> Our Website Now..............!
+                               </div>
+                             {% endif %}
+
+                        </div>
+
+                        <!-- Comments -->
+                        <hr class="tm-hr-primary tm-mb-35">
+
+                         <h2 class="text-center tm-color-primary tm-post-title">COMMENTS</h2>
+
+                        <hr class="tm-hr-primary tm-mb-35">
+                        <BR>
+                        <BR>
+                        <BR>
+
+
+                        <div class="text-center" >
+                            <a href="{% url 'add_comment' post.pk %}"  class="tm-btn tm-btn-primary tm-btn-small" >Add Comment</a>
+                        </div>
+
+                        <div>
+
+
+                             {% for comment in post.comments.all %}
+
+
+                                        {{ comment.name }}
+
+                                        <p>
+                                           {{ comment.body }}
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="tm-color-primary">{{ comment.date_added }}</span><br/>
+                                        </div>
+
+                                         <a href="{% url 'delete_comment' comment.pk %}">DELETE</a>
+
+
+
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

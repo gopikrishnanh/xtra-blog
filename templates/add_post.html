@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+ {% if user.is_authenticated %}
+    <hr class="tm-hr-primary tm-mb-75">
+    <h1>Add Post.....</h1>
+        <br/><br/>
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">POST</button>
+            </form>
+        </div>
+    <hr class="tm-hr-primary tm-mb-75">
+
+    <script>
+        var name="{{ user.id }}";
+        document.getElementById("elder").value
+            = name;
+    </script>
+{% else %}
+
+       <hr class="tm-hr-primary tm-mb-75">
+
+
+    <div class="alert alert-danger">
+        <strong >JOIN</strong> Our Website Now..............!
+    </div>
+
+
+
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+
+
+            <!-- Search form -->
+
+            <div class="row tm-row">
+                {% for post in object_list %}
+                <article class="col-12 col-md-6 tm-post">
+                    <hr class="tm-hr-primary">
+                    <a href="{% url 'post-details' post.pk %}" class="effect-lily tm-post-link tm-pt-60">
+                        <div class="tm-post-link-inner">
+                            <img src="{{ post.img.url }}" alt="Image" class="img-fluid" width="250" height="250">
+                        </div>
+                        <span class="position-absolute tm-new-badge">{{ post.title }}</span>
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ post.author }}</h2>
+                    </a>
+                    <p class="tm-pt-30">
+                        {{ post.body }}
+                    </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        <span class="tm-color-primary">Travel . Events</span>
+                        <span class="tm-color-primary">June 24, 2020</span>
+                        {% if user.is_authenticated %}
+                             {% if user.id == post.author.id %}
+                                 <a href="{% url 'update' post.pk %}">EDIT</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </article>
+            </div>
+
+{% endblock %}

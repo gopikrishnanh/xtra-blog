@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+ <h1> profile.....</h1>
+        <br/><br/>
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">POST</button>
+            </form>
+        </div>
+
+
+<center><---------* Please login our website *----------></center>
+
+{% endblock %}
